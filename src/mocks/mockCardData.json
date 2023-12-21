@@ -1,0 +1,16 @@
+{
+  "data": [
+    {
+      "fieldTag": "cvv"
+    },
+    {
+      "fieldTag": "NameInput"
+    },
+    {
+      "fieldTag": "CardNumInput"
+    },
+    {
+      "fieldTag": "CardExpirationInput"
+    }
+  ]
+}

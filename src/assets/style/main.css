@@ -1,0 +1,15 @@
+@import 'base/base.css';
+@import "icon/icon.css";
+@import "input/input.css";
+@import "title/title.css";
+
+@import "credit-card-container/credit-card-container.css";
+
+#app {
+    min-height: 100vh;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
