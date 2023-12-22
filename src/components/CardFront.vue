@@ -2,10 +2,11 @@
 import MasterCardIcon from '@/assets/icons/MasterCardIcon.vue'
 import { useCardData } from '@/stores/cardData'
 import { computed, onMounted, ref } from 'vue'
+import { FieldsData } from '@/types/FieldData'
 
 const cardData = useCardData()
 
-const fields = ref(undefined)
+const fields = ref<FieldsData | undefined>(undefined)
 
 onMounted(async () => {
   try {
@@ -19,7 +20,7 @@ onMounted(async () => {
 
 const filteredFields = computed(() => {
   if (!fields.value) return []
-  return fields.value.data.filter((field) => field.fieldTag !== 'cvv')
+  return fields.value?.data.filter((field) => field.fieldTag !== 'cvvInput')
 })
 
 const sortedFields = computed(() => {
@@ -42,7 +43,7 @@ const sortedFields = computed(() => {
     <div class="card__row">
       <span class="icon"><MasterCardIcon /></span>
     </div>
-    <div v-for="(item, index) in sortedFields" class="card__row">
+    <div v-for="(item, index) in sortedFields" :key="index" class="card__row">
       <p v-if="item.fieldTag === 'CardExpirationInput'">Expires at:</p>
       <p v-if="item.fieldTag === 'NameInput'">Full name:</p>
       <component :is="item.fieldTag" :key="index" />

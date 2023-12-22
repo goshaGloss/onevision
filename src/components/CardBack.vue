@@ -1,10 +1,11 @@
 <script lang="ts" setup>
 import { useCardData } from '@/stores/cardData'
 import { computed, onMounted, ref } from 'vue'
+import type { FieldsData } from '@/types/FieldData'
 
 const cardData = useCardData()
 
-const fields = ref(undefined)
+const fields = ref<FieldsData | undefined>(undefined)
 
 onMounted(async () => {
   try {
@@ -19,7 +20,7 @@ onMounted(async () => {
 const cvvInput = computed(() => {
   if (!fields.value) return null
 
-  return fields.value.data.find((field) => field.fieldTag === 'cvv')
+  return fields.value?.data.find((field) => field.fieldTag === 'cvvInput')
 })
 </script>
 
