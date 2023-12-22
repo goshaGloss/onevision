@@ -1,14 +1,22 @@
 <script lang="ts" setup>
 import {useCardData} from "@/stores/cardData";
+import {computed} from "vue";
 
 const cardData = useCardData()
-
+const value = computed({
+  get() {
+    return cardData.name
+  },
+  set(val:string) {
+    cardData.handleName(val.toUpperCase())
+  }
+})
 </script>
 
 <template>
 
-  <input v-model="cardData.name" class="input card-name" placeholder="JOHN DOE"
-         type="text" @input="(e) => cardData.handleName(e.target.value.toUpperCase())"/>
+  <input v-model="value" class="input card-name" placeholder="JOHN DOE"
+         type="text" />
 </template>
 
 <style scoped>

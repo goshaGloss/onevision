@@ -1,7 +1,7 @@
 import {computed, ref} from 'vue'
 import {defineStore} from 'pinia'
 import {isValidDate} from "@/utils/validateDate";
-import {FieldType} from "@/types/fieldType";
+import type {FieldType} from "@/types/fieldType";
 
 export const useCardData = defineStore('cardData', () => {
     const cardNumber = ref('')

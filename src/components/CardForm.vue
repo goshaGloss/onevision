@@ -1,11 +1,12 @@
 <script lang="ts" setup>
-import CreditCard from '@/components/CreditCard.vue'</script>
+import CreditCard from '@/components/CreditCard.vue'
+</script>
 
 <template>
   <div class="card-form-container">
     <form class="card-form">
       <h1 class="title">Enter your credit card data</h1>
-      <credit-card/>
+      <credit-card />
       <button class="card-form__submit-btn" type="submit">Submit data</button>
     </form>
   </div>
@@ -50,5 +51,14 @@ import CreditCard from '@/components/CreditCard.vue'</script>
   color: var(--gray-2);
   height: 48px;
   padding: 7px 16px;
+}
+
+@media (min-width: 340px) and (max-width: 600px) {
+  .card-form-container {
+    width: 100%;
+  }
+  .card-form {
+    border: none;
+  }
 }
 </style>

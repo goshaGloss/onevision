@@ -1,16 +1,24 @@
 <script lang="ts" setup>
 import {useCardData} from "@/stores/cardData";
+import {computed} from "vue";
 
 const cardData = useCardData()
-
+const value = computed({
+  get() {
+    return cardData.cvv
+  },
+  set(val:string) {
+    cardData.handleCvv(val.toUpperCase())
+  }
+})
 </script>
 
 <template>
 
   <label class="card-cvv__label">
     <span>cvv</span>
-    <input v-model="cardData.cvv" class="input card-cvv" maxlength="3" placeholder="***"
-           type="text" @input="(e) => cardData.handleCvv(e.target.value)"/>
+    <input v-model="value" class="input card-cvv" maxlength="3" placeholder="***"
+           type="text"/>
   </label>
 </template>
 

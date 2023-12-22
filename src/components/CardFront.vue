@@ -1,8 +1,7 @@
 <script lang="ts" setup>
-
-import MasterCardIcon from "@/assets/icons/MasterCardIcon.vue";
-import {useCardData} from "@/stores/cardData";
-import {computed, onMounted, ref} from "vue";
+import MasterCardIcon from '@/assets/icons/MasterCardIcon.vue'
+import { useCardData } from '@/stores/cardData'
+import { computed, onMounted, ref } from 'vue'
 
 const cardData = useCardData()
 
@@ -12,16 +11,15 @@ onMounted(async () => {
   try {
     const response = await cardData.getFieldData()
 
-    fields.value = response;
+    fields.value = response
   } catch (error) {
-    console.error('Error loading JSON:', error);
+    console.error('Error loading JSON:', error)
   }
-});
-
+})
 
 const filteredFields = computed(() => {
   if (!fields.value) return []
-  return fields.value.data.filter(field => field.fieldTag !== 'cvv')
+  return fields.value.data.filter((field) => field.fieldTag !== 'cvv')
 })
 
 const sortedFields = computed(() => {
@@ -29,12 +27,12 @@ const sortedFields = computed(() => {
   const sortedArr = filteredFields.value
   return sortedArr.sort((a, b) => {
     const order = {
-      "CardNumInput": 0,
-      "CardExpirationInput": 1,
-      "NameInput": 2
-    };
+      CardNumInput: 0,
+      CardExpirationInput: 1,
+      NameInput: 2
+    }
 
-    return order[a.fieldTag] - order[b.fieldTag];
+    return order[a.fieldTag] - order[b.fieldTag]
   })
 })
 </script>
@@ -42,16 +40,15 @@ const sortedFields = computed(() => {
 <template>
   <div class="card">
     <div class="card__row">
-      <span class="icon"><MasterCardIcon/></span>
+      <span class="icon"><MasterCardIcon /></span>
     </div>
     <div v-for="(item, index) in sortedFields" class="card__row">
       <p v-if="item.fieldTag === 'CardExpirationInput'">Expires at:</p>
       <p v-if="item.fieldTag === 'NameInput'">Full name:</p>
-      <component :is="item.fieldTag" :key="index"/>
+      <component :is="item.fieldTag" :key="index" />
     </div>
   </div>
 </template>
-
 
 <style scoped>
 .card {
@@ -73,5 +70,13 @@ const sortedFields = computed(() => {
 
 .card__row:not(:first-child) {
   margin-top: 8px;
+}
+@media (max-width: 750px) {
+  .card {
+    width: 300px;
+    height: 180px;
+    padding: 30px;
+    font-size: 11px;
+  }
 }
 </style>
